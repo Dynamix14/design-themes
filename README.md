@@ -6,6 +6,9 @@ mined for tokens.
 
 **Live gallery:** https://dynamix14.github.io/design-themes/
 
+Gallery features: search, dark/light + brand/archetype filters, `★` save to a local
+shortlist (persists in your browser), `⧉ tokens` to copy a theme's `:root` CSS.
+
 ## Structure
 
 ```

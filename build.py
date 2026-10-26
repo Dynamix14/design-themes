@@ -617,6 +617,12 @@ h1 em{font-style:normal;color:var(--accent)}
   border:1px solid var(--line);border-radius:5px;padding:3px 6px;color:var(--muted)}
 .pill.dark{color:#B9B9C6}
 .pill.light{color:#F0E3B4;border-color:#3A3524}
+.star{position:absolute;left:10px;top:10px;z-index:2;width:30px;height:30px;
+  border-radius:8px;background:rgba(10,10,12,.6);border:1px solid rgba(255,255,255,.16);
+  color:#fff;font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;
+  backdrop-filter:blur(6px);opacity:0;transition:.15s}
+.tile:hover .star,.star.on{opacity:1}
+.star.on{color:#C6F24E;border-color:rgba(198,242,78,.5)}
 .copy{position:absolute;right:14px;top:12px;background:#191920;border:1px solid var(--line);
   color:var(--muted);border-radius:6px;font:600 11px/1 inherit;padding:6px 8px;
   cursor:pointer;opacity:0;transition:.15s}
@@ -637,8 +643,8 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
 .note p{color:var(--muted);font-size:13.5px;margin:0}
 .note code{background:#1B1B21;border-radius:4px;padding:1px 5px;font-size:12px}
 @media(max-width:820px){.note{grid-template-columns:1fr}.grid{grid-template-columns:1fr}
-  .copy{opacity:.62}
-  .tile:hover .copy{opacity:1}}
+  .copy,.star{opacity:.62}
+  .tile:hover .copy,.tile:hover .star{opacity:1}}
 """
 
 INDEX_JS = """
@@ -669,6 +675,27 @@ const grid=document.getElementById('grid'), empty=document.getElementById('empty
 const count=document.getElementById('count'), q=document.getElementById('q');
 const chips=[...document.querySelectorAll('.chip')];
 let filter='all';
+const FAV_KEY='design-themes-fav';
+let favs=new Set();
+try{ favs=new Set(JSON.parse(localStorage.getItem(FAV_KEY)||'[]')); }catch(e){}
+function paintFavs(){
+  document.querySelectorAll('.star').forEach(b=>{
+    const on=favs.has(b.dataset.slug);
+    b.classList.toggle('on',on);
+    b.textContent=on?'★':'☆';
+  });
+  const fc=document.getElementById('favcount');
+  if(fc) fc.textContent=favs.size? '('+favs.size+')' : '';
+}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('.star'); if(!s) return;
+  e.preventDefault(); e.stopPropagation();
+  const slug=s.dataset.slug;
+  favs.has(slug)?favs.delete(slug):favs.add(slug);
+  try{ localStorage.setItem(FAV_KEY, JSON.stringify([...favs])); }catch(e){}
+  paintFavs(); apply();
+});
+paintFavs();
 
 function apply(){
   const term=q.value.trim().toLowerCase();
@@ -676,7 +703,9 @@ function apply(){
   tiles.forEach(t=>{
     const mode=t.dataset.mode, cat=t.dataset.cat, name=t.dataset.name;
     const byMode = (filter==='dark' || filter==='light');
-    const okF = filter==='all' ? true : (byMode ? mode===filter : cat===filter);
+    const okF = filter==='all' ? true
+      : filter==='fav' ? favs.has(t.dataset.slug)
+      : byMode ? mode===filter : cat===filter;
     const okQ = !term || name.includes(term);
     const show = okF && okQ;
     t.style.display = show ? '' : 'none';
@@ -736,10 +765,11 @@ def build_index(themes, tokens):
     cards = []
     for t in themes:
         cards.append(f"""
-    <article class="tile" data-mode="{t['mode']}" data-cat="{t['cat']}" data-name="{esc(t['name'].lower())}">
+    <article class="tile" data-slug="{t['slug']}" data-mode="{t['mode']}" data-cat="{t['cat']}" data-name="{esc(t['name'].lower())}">
       <a class="shot" href="themes/{t['slug']}.html" aria-label="Open {esc(t['name'])} sample">
         {mini(t)}
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="{t['slug']}" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -790,6 +820,7 @@ def build_index(themes, tokens):
       <button class="chip" data-f="light" aria-pressed="false">Light</button>
       <button class="chip" data-f="Brand" aria-pressed="false">Brand</button>
       <button class="chip" data-f="Archetype" aria-pressed="false">Archetype</button>
+      <button class="chip" data-f="fav" aria-pressed="false">★ Saved <span id="favcount"></span></button>
     </div>
   </div>
 </div></header>
@@ -835,6 +866,9 @@ feature cards, metrics, pricing, CTA, footer). Built to be browsed, compared, an
 mined for tokens.
 
 **Live gallery:** https://dynamix14.github.io/design-themes/
+
+Gallery features: search, dark/light + brand/archetype filters, `★` save to a local
+shortlist (persists in your browser), `⧉ tokens` to copy a theme's `:root` CSS.
 
 ## Structure
 

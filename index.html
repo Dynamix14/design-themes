@@ -100,6 +100,12 @@ h1 em{font-style:normal;color:var(--accent)}
   border:1px solid var(--line);border-radius:5px;padding:3px 6px;color:var(--muted)}
 .pill.dark{color:#B9B9C6}
 .pill.light{color:#F0E3B4;border-color:#3A3524}
+.star{position:absolute;left:10px;top:10px;z-index:2;width:30px;height:30px;
+  border-radius:8px;background:rgba(10,10,12,.6);border:1px solid rgba(255,255,255,.16);
+  color:#fff;font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;
+  backdrop-filter:blur(6px);opacity:0;transition:.15s}
+.tile:hover .star,.star.on{opacity:1}
+.star.on{color:#C6F24E;border-color:rgba(198,242,78,.5)}
 .copy{position:absolute;right:14px;top:12px;background:#191920;border:1px solid var(--line);
   color:var(--muted);border-radius:6px;font:600 11px/1 inherit;padding:6px 8px;
   cursor:pointer;opacity:0;transition:.15s}
@@ -120,8 +126,8 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
 .note p{color:var(--muted);font-size:13.5px;margin:0}
 .note code{background:#1B1B21;border-radius:4px;padding:1px 5px;font-size:12px}
 @media(max-width:820px){.note{grid-template-columns:1fr}.grid{grid-template-columns:1fr}
-  .copy{opacity:.62}
-  .tile:hover .copy{opacity:1}}
+  .copy,.star{opacity:.62}
+  .tile:hover .copy,.tile:hover .star{opacity:1}}
 </style>
 </head>
 <body>
@@ -143,6 +149,7 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
       <button class="chip" data-f="light" aria-pressed="false">Light</button>
       <button class="chip" data-f="Brand" aria-pressed="false">Brand</button>
       <button class="chip" data-f="Archetype" aria-pressed="false">Archetype</button>
+      <button class="chip" data-f="fav" aria-pressed="false">★ Saved <span id="favcount"></span></button>
     </div>
   </div>
 </div></header>
@@ -162,10 +169,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
   </div>
 
   <div class="grid" id="grid">
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="claude / anthropic warm editorial">
+    <article class="tile" data-slug="claude" data-mode="light" data-cat="Brand" data-name="claude / anthropic warm editorial">
       <a class="shot" href="themes/claude.html" aria-label="Open Claude / Anthropic warm editorial sample">
         <span class="mini" style="--m-bg:#F5F4EE;--m-surface:#FBFAF6;--m-line:#DEDBD2;--m-text:#1F1E1B;--m-muted:#6B6A63;--m-accent:#C15F3C;--m-accent2:#8C7A6B;--m-on:#FFFFFF;--m-r:14px;--m-fh:'Instrument Serif', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="claude" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -181,10 +189,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="cohere data-vivid">
+    <article class="tile" data-slug="cohere" data-mode="light" data-cat="Brand" data-name="cohere data-vivid">
       <a class="shot" href="themes/cohere.html" aria-label="Open Cohere data-vivid sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F6F7F5;--m-line:#E2E5E0;--m-text:#0E1912;--m-muted:#5C6B62;--m-accent:#39594D;--m-accent2:#FF7759;--m-on:#FFFFFF;--m-r:12px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="cohere" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -200,10 +209,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="elevenlabs cinematic dark">
+    <article class="tile" data-slug="elevenlabs" data-mode="dark" data-cat="Brand" data-name="elevenlabs cinematic dark">
       <a class="shot" href="themes/elevenlabs.html" aria-label="Open ElevenLabs cinematic dark sample">
         <span class="mini" style="--m-bg:#08080A;--m-surface:#111114;--m-line:#26262B;--m-text:#F2F2F4;--m-muted:#8D8D96;--m-accent:#E8E8EA;--m-accent2:#6E56CF;--m-on:#0B0B0C;--m-r:10px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="elevenlabs" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -219,10 +229,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="minimax neon bold">
+    <article class="tile" data-slug="minimax" data-mode="dark" data-cat="Brand" data-name="minimax neon bold">
       <a class="shot" href="themes/minimax.html" aria-label="Open Minimax neon bold sample">
         <span class="mini" style="--m-bg:#0A0A0F;--m-surface:#13131B;--m-line:#262633;--m-text:#F6F6FA;--m-muted:#8F8FA6;--m-accent:#FF4D6D;--m-accent2:#7B61FF;--m-on:#FFFFFF;--m-r:16px;--m-fh:'Sora', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Sora', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="minimax" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -238,10 +249,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="mistral orange minimal">
+    <article class="tile" data-slug="mistral" data-mode="light" data-cat="Brand" data-name="mistral orange minimal">
       <a class="shot" href="themes/mistral.html" aria-label="Open Mistral orange minimal sample">
         <span class="mini" style="--m-bg:#FFFAF0;--m-surface:#FFFFFF;--m-line:#EFE4D2;--m-text:#1A1712;--m-muted:#6E6354;--m-accent:#FF7000;--m-accent2:#1A1712;--m-on:#FFFFFF;--m-r:8px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="mistral" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -257,10 +269,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="ollama terminal mono">
+    <article class="tile" data-slug="ollama" data-mode="light" data-cat="Brand" data-name="ollama terminal mono">
       <a class="shot" href="themes/ollama.html" aria-label="Open Ollama terminal mono sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F5F5F5;--m-line:#DFDFDF;--m-text:#0A0A0A;--m-muted:#5F5F5F;--m-accent:#0A0A0A;--m-accent2:#5F5F5F;--m-on:#FFFFFF;--m-r:2px;--m-fh:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="ollama" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -276,10 +289,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="opencode dev mono">
+    <article class="tile" data-slug="opencode" data-mode="dark" data-cat="Brand" data-name="opencode dev mono">
       <a class="shot" href="themes/opencode.html" aria-label="Open OpenCode dev mono sample">
         <span class="mini" style="--m-bg:#0D0D0D;--m-surface:#161616;--m-line:#2A2A2A;--m-text:#EDEDED;--m-muted:#8A8A8A;--m-accent:#E5A00D;--m-accent2:#EDEDED;--m-on:#FFFFFF;--m-r:3px;--m-fh:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="opencode" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -295,10 +309,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="replicate code-forward">
+    <article class="tile" data-slug="replicate" data-mode="light" data-cat="Brand" data-name="replicate code-forward">
       <a class="shot" href="themes/replicate.html" aria-label="Open Replicate code-forward sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#FAFAFA;--m-line:#E6E6E6;--m-text:#111111;--m-muted:#666666;--m-accent:#EA2804;--m-accent2:#111111;--m-on:#FFFFFF;--m-r:6px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="replicate" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -314,10 +329,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="runway cinematic black">
+    <article class="tile" data-slug="runwayml" data-mode="dark" data-cat="Brand" data-name="runway cinematic black">
       <a class="shot" href="themes/runwayml.html" aria-label="Open Runway cinematic black sample">
         <span class="mini" style="--m-bg:#000000;--m-surface:#0D0D0D;--m-line:#242424;--m-text:#FFFFFF;--m-muted:#9A9A9A;--m-accent:#FFFFFF;--m-accent2:#00C2FF;--m-on:#0B0B0C;--m-r:4px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="runwayml" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -333,10 +349,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="together ai blueprint">
+    <article class="tile" data-slug="together" data-mode="dark" data-cat="Brand" data-name="together ai blueprint">
       <a class="shot" href="themes/together.html" aria-label="Open Together AI blueprint sample">
         <span class="mini" style="--m-bg:#0B1120;--m-surface:#111A2E;--m-line:#1F2C47;--m-text:#E7EEFB;--m-muted:#8FA1C0;--m-accent:#0EA5E9;--m-accent2:#6366F1;--m-on:#FFFFFF;--m-r:8px;--m-fh:'IBM Plex Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'IBM Plex Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="together" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -352,10 +369,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="voltagent void emerald">
+    <article class="tile" data-slug="voltagent" data-mode="dark" data-cat="Brand" data-name="voltagent void emerald">
       <a class="shot" href="themes/voltagent.html" aria-label="Open VoltAgent void emerald sample">
         <span class="mini" style="--m-bg:#050505;--m-surface:#0D0D0D;--m-line:#1F1F1F;--m-text:#F2F2F2;--m-muted:#8A8A8A;--m-accent:#10B981;--m-accent2:#34D399;--m-on:#FFFFFF;--m-r:6px;--m-fh:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="voltagent" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -371,10 +389,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="xai stark mono">
+    <article class="tile" data-slug="xai" data-mode="dark" data-cat="Brand" data-name="xai stark mono">
       <a class="shot" href="themes/xai.html" aria-label="Open xAI stark mono sample">
         <span class="mini" style="--m-bg:#000000;--m-surface:#0A0A0A;--m-line:#1E1E1E;--m-text:#FFFFFF;--m-muted:#8C8C8C;--m-accent:#FFFFFF;--m-accent2:#8C8C8C;--m-on:#0B0B0C;--m-r:0px;--m-fh:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="xai" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -390,10 +409,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="cursor gradient dark">
+    <article class="tile" data-slug="cursor" data-mode="dark" data-cat="Brand" data-name="cursor gradient dark">
       <a class="shot" href="themes/cursor.html" aria-label="Open Cursor gradient dark sample">
         <span class="mini" style="--m-bg:#0C0C0D;--m-surface:#141416;--m-line:#26262A;--m-text:#EFEFF1;--m-muted:#8C8C94;--m-accent:#8B5CF6;--m-accent2:#3B82F6;--m-on:#FFFFFF;--m-r:10px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="cursor" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -409,10 +429,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="expo tight code">
+    <article class="tile" data-slug="expo" data-mode="dark" data-cat="Brand" data-name="expo tight code">
       <a class="shot" href="themes/expo.html" aria-label="Open Expo tight code sample">
         <span class="mini" style="--m-bg:#0B0B0F;--m-surface:#141419;--m-line:#242430;--m-text:#F1F1F5;--m-muted:#8E8E9C;--m-accent:#4630EB;--m-accent2:#00D2FF;--m-on:#FFFFFF;--m-r:8px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="expo" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -428,10 +449,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="linear precise dark">
+    <article class="tile" data-slug="linear" data-mode="dark" data-cat="Brand" data-name="linear precise dark">
       <a class="shot" href="themes/linear.html" aria-label="Open Linear precise dark sample">
         <span class="mini" style="--m-bg:#08090A;--m-surface:#101113;--m-line:#1F2124;--m-text:#F7F8F8;--m-muted:#8A8F98;--m-accent:#5E6AD2;--m-accent2:#8B93E8;--m-on:#FFFFFF;--m-r:8px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="linear" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -447,10 +469,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="lovable playful gradient">
+    <article class="tile" data-slug="lovable" data-mode="light" data-cat="Brand" data-name="lovable playful gradient">
       <a class="shot" href="themes/lovable.html" aria-label="Open Lovable playful gradient sample">
         <span class="mini" style="--m-bg:#FFF8F2;--m-surface:#FFFFFF;--m-line:#F3E4D8;--m-text:#241B16;--m-muted:#7A6A60;--m-accent:#FF5C8A;--m-accent2:#FFB347;--m-on:#FFFFFF;--m-r:20px;--m-fh:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="lovable" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -466,10 +489,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="mintlify reading green">
+    <article class="tile" data-slug="mintlify" data-mode="light" data-cat="Brand" data-name="mintlify reading green">
       <a class="shot" href="themes/mintlify.html" aria-label="Open Mintlify reading green sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F7F9F8;--m-line:#E3E9E6;--m-text:#0C1A14;--m-muted:#5C6B65;--m-accent:#0D9373;--m-accent2:#111111;--m-on:#FFFFFF;--m-r:8px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="mintlify" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -485,10 +509,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="posthog playful data">
+    <article class="tile" data-slug="posthog" data-mode="light" data-cat="Brand" data-name="posthog playful data">
       <a class="shot" href="themes/posthog.html" aria-label="Open PostHog playful data sample">
         <span class="mini" style="--m-bg:#FFF8F2;--m-surface:#FFFFFF;--m-line:#EFE0D4;--m-text:#1C1410;--m-muted:#6F6058;--m-accent:#F54E00;--m-accent2:#1D4AFF;--m-on:#FFFFFF;--m-r:12px;--m-fh:'Rubik', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Rubik', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="posthog" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -504,10 +529,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="raycast chrome glow">
+    <article class="tile" data-slug="raycast" data-mode="dark" data-cat="Brand" data-name="raycast chrome glow">
       <a class="shot" href="themes/raycast.html" aria-label="Open Raycast chrome glow sample">
         <span class="mini" style="--m-bg:#070708;--m-surface:#111112;--m-line:#26262A;--m-text:#F4F4F6;--m-muted:#8B8B93;--m-accent:#FF6363;--m-accent2:#7C5CFF;--m-on:#FFFFFF;--m-r:12px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="raycast" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -523,10 +549,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="resend minimal mono">
+    <article class="tile" data-slug="resend" data-mode="dark" data-cat="Brand" data-name="resend minimal mono">
       <a class="shot" href="themes/resend.html" aria-label="Open Resend minimal mono sample">
         <span class="mini" style="--m-bg:#000000;--m-surface:#0C0C0C;--m-line:#222222;--m-text:#F5F5F5;--m-muted:#8F8F8F;--m-accent:#FFFFFF;--m-accent2:#A3E635;--m-on:#0B0B0C;--m-r:6px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="resend" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -542,10 +569,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="sentry data dense">
+    <article class="tile" data-slug="sentry" data-mode="dark" data-cat="Brand" data-name="sentry data dense">
       <a class="shot" href="themes/sentry.html" aria-label="Open Sentry data dense sample">
         <span class="mini" style="--m-bg:#181225;--m-surface:#211A33;--m-line:#332B4D;--m-text:#F2EFF8;--m-muted:#A99FC0;--m-accent:#F06BA8;--m-accent2:#7553FF;--m-on:#FFFFFF;--m-r:8px;--m-fh:'Rubik', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Rubik', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="sentry" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -561,10 +589,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="supabase emerald dark">
+    <article class="tile" data-slug="supabase" data-mode="dark" data-cat="Brand" data-name="supabase emerald dark">
       <a class="shot" href="themes/supabase.html" aria-label="Open Supabase emerald dark sample">
         <span class="mini" style="--m-bg:#121212;--m-surface:#1A1A1A;--m-line:#2C2C2C;--m-text:#EDEDED;--m-muted:#8C8C8C;--m-accent:#3ECF8E;--m-accent2:#1F9E6B;--m-on:#0B0B0C;--m-r:8px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="supabase" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -580,10 +609,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="superhuman premium glow">
+    <article class="tile" data-slug="superhuman" data-mode="dark" data-cat="Brand" data-name="superhuman premium glow">
       <a class="shot" href="themes/superhuman.html" aria-label="Open Superhuman premium glow sample">
         <span class="mini" style="--m-bg:#141317;--m-surface:#1B1A20;--m-line:#2C2A33;--m-text:#F5F3F8;--m-muted:#9A96A6;--m-accent:#8A6BFF;--m-accent2:#C9A4FF;--m-on:#FFFFFF;--m-r:14px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="superhuman" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -599,10 +629,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="vercel black and white">
+    <article class="tile" data-slug="vercel" data-mode="light" data-cat="Brand" data-name="vercel black and white">
       <a class="shot" href="themes/vercel.html" aria-label="Open Vercel black and white sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#FAFAFA;--m-line:#EAEAEA;--m-text:#000000;--m-muted:#666666;--m-accent:#000000;--m-accent2:#0070F3;--m-on:#FFFFFF;--m-r:6px;--m-fh:'Geist', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Geist', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="vercel" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -618,10 +649,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="warp block terminal">
+    <article class="tile" data-slug="warp" data-mode="dark" data-cat="Brand" data-name="warp block terminal">
       <a class="shot" href="themes/warp.html" aria-label="Open Warp block terminal sample">
         <span class="mini" style="--m-bg:#0A0A0A;--m-surface:#141414;--m-line:#282828;--m-text:#F0F0F0;--m-muted:#8A8A8A;--m-accent:#01A0FF;--m-accent2:#F0F0F0;--m-on:#FFFFFF;--m-r:6px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="warp" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -637,10 +669,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="zapier warm friendly">
+    <article class="tile" data-slug="zapier" data-mode="light" data-cat="Brand" data-name="zapier warm friendly">
       <a class="shot" href="themes/zapier.html" aria-label="Open Zapier warm friendly sample">
         <span class="mini" style="--m-bg:#FFF3E8;--m-surface:#FFFFFF;--m-line:#F2DFCE;--m-text:#2B1B10;--m-muted:#77665A;--m-accent:#FF4F00;--m-accent2:#2B1B10;--m-on:#FFFFFF;--m-r:16px;--m-fh:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="zapier" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -656,10 +689,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="clickhouse yellow technical">
+    <article class="tile" data-slug="clickhouse" data-mode="light" data-cat="Brand" data-name="clickhouse yellow technical">
       <a class="shot" href="themes/clickhouse.html" aria-label="Open ClickHouse yellow technical sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#FFFDF2;--m-line:#EDE7CF;--m-text:#141414;--m-muted:#6B6754;--m-accent:#FFCC01;--m-accent2:#141414;--m-on:#0B0B0C;--m-r:4px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="clickhouse" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -675,10 +709,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="composio integration dark">
+    <article class="tile" data-slug="composio" data-mode="dark" data-cat="Brand" data-name="composio integration dark">
       <a class="shot" href="themes/composio.html" aria-label="Open Composio integration dark sample">
         <span class="mini" style="--m-bg:#08080C;--m-surface:#101016;--m-line:#232330;--m-text:#F2F2F7;--m-muted:#8B8B99;--m-accent:#6C5CE7;--m-accent2:#22D3EE;--m-on:#FFFFFF;--m-r:12px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="composio" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -694,10 +729,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="hashicorp enterprise b/w">
+    <article class="tile" data-slug="hashicorp" data-mode="light" data-cat="Brand" data-name="hashicorp enterprise b/w">
       <a class="shot" href="themes/hashicorp.html" aria-label="Open HashiCorp enterprise B/W sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F4F4F4;--m-line:#DCDCDC;--m-text:#0D0D0D;--m-muted:#6A6A6A;--m-accent:#0D0D0D;--m-accent2:#1060FF;--m-on:#FFFFFF;--m-r:4px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="hashicorp" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -713,10 +749,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="mongodb leaf green">
+    <article class="tile" data-slug="mongodb" data-mode="light" data-cat="Brand" data-name="mongodb leaf green">
       <a class="shot" href="themes/mongodb.html" aria-label="Open MongoDB leaf green sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F9FBF9;--m-line:#E1EAE3;--m-text:#001E2B;--m-muted:#4C6A5B;--m-accent:#00ED64;--m-accent2:#001E2B;--m-on:#0B0B0C;--m-r:8px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="mongodb" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -732,10 +769,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="sanity red content-first">
+    <article class="tile" data-slug="sanity" data-mode="light" data-cat="Brand" data-name="sanity red content-first">
       <a class="shot" href="themes/sanity.html" aria-label="Open Sanity red content-first sample">
         <span class="mini" style="--m-bg:#F9F9F9;--m-surface:#FFFFFF;--m-line:#E6E6E6;--m-text:#101112;--m-muted:#63656A;--m-accent:#F03E2F;--m-accent2:#101112;--m-on:#FFFFFF;--m-r:6px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="sanity" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -751,10 +789,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="stripe gradient elegance">
+    <article class="tile" data-slug="stripe" data-mode="light" data-cat="Brand" data-name="stripe gradient elegance">
       <a class="shot" href="themes/stripe.html" aria-label="Open Stripe gradient elegance sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F6F9FC;--m-line:#E3E8EE;--m-text:#0A2540;--m-muted:#425466;--m-accent:#635BFF;--m-accent2:#00D4FF;--m-on:#FFFFFF;--m-r:10px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="stripe" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -770,10 +809,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="airtable structured colour">
+    <article class="tile" data-slug="airtable" data-mode="light" data-cat="Brand" data-name="airtable structured colour">
       <a class="shot" href="themes/airtable.html" aria-label="Open Airtable structured colour sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F7F8FA;--m-line:#E4E7EC;--m-text:#1D1F25;--m-muted:#61646C;--m-accent:#FCB400;--m-accent2:#18BFFF;--m-on:#0B0B0C;--m-r:10px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="airtable" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -789,10 +829,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="cal.com neutral simple">
+    <article class="tile" data-slug="cal" data-mode="light" data-cat="Brand" data-name="cal.com neutral simple">
       <a class="shot" href="themes/cal.html" aria-label="Open Cal.com neutral simple sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F9F9F9;--m-line:#E5E5E5;--m-text:#111111;--m-muted:#666666;--m-accent:#111111;--m-accent2:#3B82F6;--m-on:#FFFFFF;--m-r:8px;--m-fh:'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="cal" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -808,10 +849,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="clay organic art direction">
+    <article class="tile" data-slug="clay" data-mode="light" data-cat="Brand" data-name="clay organic art direction">
       <a class="shot" href="themes/clay.html" aria-label="Open Clay organic art direction sample">
         <span class="mini" style="--m-bg:#F7F6F3;--m-surface:#FFFFFF;--m-line:#E4E1D8;--m-text:#1B1A17;--m-muted:#6E6A62;--m-accent:#5B5BD6;--m-accent2:#B4E1C1;--m-on:#FFFFFF;--m-r:24px;--m-fh:'Fraunces', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="clay" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -827,10 +869,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="figma multicolour playful">
+    <article class="tile" data-slug="figma" data-mode="light" data-cat="Brand" data-name="figma multicolour playful">
       <a class="shot" href="themes/figma.html" aria-label="Open Figma multicolour playful sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F7F7F7;--m-line:#E4E4E4;--m-text:#1E1E1E;--m-muted:#666666;--m-accent:#F24E1E;--m-accent2:#A259FF;--m-on:#FFFFFF;--m-r:12px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="figma" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -846,10 +889,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="framer motion bold">
+    <article class="tile" data-slug="framer" data-mode="dark" data-cat="Brand" data-name="framer motion bold">
       <a class="shot" href="themes/framer.html" aria-label="Open Framer motion bold sample">
         <span class="mini" style="--m-bg:#0A0A0A;--m-surface:#131313;--m-line:#262626;--m-text:#FFFFFF;--m-muted:#909090;--m-accent:#0099FF;--m-accent2:#0055FF;--m-on:#FFFFFF;--m-r:10px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="framer" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -865,10 +909,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="intercom conversational blue">
+    <article class="tile" data-slug="intercom" data-mode="light" data-cat="Brand" data-name="intercom conversational blue">
       <a class="shot" href="themes/intercom.html" aria-label="Open Intercom conversational blue sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F5F9FF;--m-line:#DCE8F7;--m-text:#0B1B2B;--m-muted:#5A6B7D;--m-accent:#1F8DED;--m-accent2:#0B1B2B;--m-on:#FFFFFF;--m-r:14px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="intercom" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -884,10 +929,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="miro canvas yellow">
+    <article class="tile" data-slug="miro" data-mode="light" data-cat="Brand" data-name="miro canvas yellow">
       <a class="shot" href="themes/miro.html" aria-label="Open Miro canvas yellow sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#FFFDF0;--m-line:#EDE6CC;--m-text:#1A1A1A;--m-muted:#6B6B6B;--m-accent:#FFD02F;--m-accent2:#1A1A1A;--m-on:#0B0B0C;--m-r:16px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="miro" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -903,10 +949,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="notion warm minimal">
+    <article class="tile" data-slug="notion" data-mode="light" data-cat="Brand" data-name="notion warm minimal">
       <a class="shot" href="themes/notion.html" aria-label="Open Notion warm minimal sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F7F6F3;--m-line:#E9E7E2;--m-text:#191919;--m-muted:#73726E;--m-accent:#191919;--m-accent2:#E9E7E2;--m-on:#FFFFFF;--m-r:4px;--m-fh:'Lora', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="notion" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -922,10 +969,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="pinterest image-first">
+    <article class="tile" data-slug="pinterest" data-mode="light" data-cat="Brand" data-name="pinterest image-first">
       <a class="shot" href="themes/pinterest.html" aria-label="Open Pinterest image-first sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F1F1F1;--m-line:#E0E0E0;--m-text:#111111;--m-muted:#5F5F5F;--m-accent:#E60023;--m-accent2:#111111;--m-on:#FFFFFF;--m-r:18px;--m-fh:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="pinterest" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -941,10 +989,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="webflow polished marketing">
+    <article class="tile" data-slug="webflow" data-mode="light" data-cat="Brand" data-name="webflow polished marketing">
       <a class="shot" href="themes/webflow.html" aria-label="Open Webflow polished marketing sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F8F9FB;--m-line:#E1E5EA;--m-text:#080808;--m-muted:#5C636E;--m-accent:#146EF5;--m-accent2:#080808;--m-on:#FFFFFF;--m-r:8px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="webflow" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -960,10 +1009,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="coinbase institutional blue">
+    <article class="tile" data-slug="coinbase" data-mode="light" data-cat="Brand" data-name="coinbase institutional blue">
       <a class="shot" href="themes/coinbase.html" aria-label="Open Coinbase institutional blue sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F5F8FF;--m-line:#DCE4F2;--m-text:#0A0B0D;--m-muted:#5B6472;--m-accent:#0052FF;--m-accent2:#0A0B0D;--m-on:#FFFFFF;--m-r:10px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="coinbase" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -979,10 +1029,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="kraken purple data">
+    <article class="tile" data-slug="kraken" data-mode="dark" data-cat="Brand" data-name="kraken purple data">
       <a class="shot" href="themes/kraken.html" aria-label="Open Kraken purple data sample">
         <span class="mini" style="--m-bg:#0B0E14;--m-surface:#131824;--m-line:#232B3D;--m-text:#EAEEF7;--m-muted:#8A93A6;--m-accent:#7B3FE4;--m-accent2:#35D0BA;--m-on:#FFFFFF;--m-r:8px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="kraken" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -998,10 +1049,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="revolut fintech dark">
+    <article class="tile" data-slug="revolut" data-mode="dark" data-cat="Brand" data-name="revolut fintech dark">
       <a class="shot" href="themes/revolut.html" aria-label="Open Revolut fintech dark sample">
         <span class="mini" style="--m-bg:#07070A;--m-surface:#111116;--m-line:#242430;--m-text:#F7F7FA;--m-muted:#8E8E9E;--m-accent:#FFFFFF;--m-accent2:#6C5CE7;--m-on:#0B0B0C;--m-r:16px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="revolut" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1017,10 +1069,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="wise bright green">
+    <article class="tile" data-slug="wise" data-mode="light" data-cat="Brand" data-name="wise bright green">
       <a class="shot" href="themes/wise.html" aria-label="Open Wise bright green sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F2FBEA;--m-line:#DBEBC8;--m-text:#163300;--m-muted:#4A6B33;--m-accent:#9FE870;--m-accent2:#163300;--m-on:#0B0B0C;--m-r:18px;--m-fh:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="wise" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1036,10 +1089,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="airbnb coral warmth">
+    <article class="tile" data-slug="airbnb" data-mode="light" data-cat="Brand" data-name="airbnb coral warmth">
       <a class="shot" href="themes/airbnb.html" aria-label="Open Airbnb coral warmth sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F7F7F7;--m-line:#EBEBEB;--m-text:#222222;--m-muted:#6A6A6A;--m-accent:#FF385C;--m-accent2:#222222;--m-on:#FFFFFF;--m-r:18px;--m-fh:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="airbnb" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1055,10 +1109,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="apple premium white space">
+    <article class="tile" data-slug="apple" data-mode="light" data-cat="Brand" data-name="apple premium white space">
       <a class="shot" href="themes/apple.html" aria-label="Open Apple premium white space sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F5F5F7;--m-line:#E5E5E7;--m-text:#1D1D1F;--m-muted:#6E6E73;--m-accent:#0071E3;--m-accent2:#1D1D1F;--m-on:#FFFFFF;--m-r:18px;--m-fh:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;--m-fb:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="apple" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1074,10 +1129,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="bmw engineering dark">
+    <article class="tile" data-slug="bmw" data-mode="dark" data-cat="Brand" data-name="bmw engineering dark">
       <a class="shot" href="themes/bmw.html" aria-label="Open BMW engineering dark sample">
         <span class="mini" style="--m-bg:#0B0B0D;--m-surface:#111114;--m-line:#26262B;--m-text:#F4F4F5;--m-muted:#95959C;--m-accent:#0066B1;--m-accent2:#FFFFFF;--m-on:#FFFFFF;--m-r:2px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="bmw" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1093,10 +1149,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="ibm carbon blue">
+    <article class="tile" data-slug="ibm" data-mode="light" data-cat="Brand" data-name="ibm carbon blue">
       <a class="shot" href="themes/ibm.html" aria-label="Open IBM Carbon blue sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F4F4F4;--m-line:#E0E0E0;--m-text:#161616;--m-muted:#525252;--m-accent:#0F62FE;--m-accent2:#161616;--m-on:#FFFFFF;--m-r:0px;--m-fh:'IBM Plex Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'IBM Plex Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="ibm" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1112,10 +1169,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="nvidia green-black">
+    <article class="tile" data-slug="nvidia" data-mode="dark" data-cat="Brand" data-name="nvidia green-black">
       <a class="shot" href="themes/nvidia.html" aria-label="Open NVIDIA green-black sample">
         <span class="mini" style="--m-bg:#000000;--m-surface:#0D1208;--m-line:#233014;--m-text:#F2F5EC;--m-muted:#93A583;--m-accent:#76B900;--m-accent2:#B4FF3A;--m-on:#FFFFFF;--m-r:3px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="nvidia" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1131,10 +1189,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="spacex stark full-bleed">
+    <article class="tile" data-slug="spacex" data-mode="dark" data-cat="Brand" data-name="spacex stark full-bleed">
       <a class="shot" href="themes/spacex.html" aria-label="Open SpaceX stark full-bleed sample">
         <span class="mini" style="--m-bg:#000000;--m-surface:#0A0A0A;--m-line:#222222;--m-text:#FFFFFF;--m-muted:#9C9C9C;--m-accent:#FFFFFF;--m-accent2:#9C9C9C;--m-on:#0B0B0C;--m-r:0px;--m-fh:'Bebas Neue', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="spacex" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1150,10 +1209,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="spotify bold green">
+    <article class="tile" data-slug="spotify" data-mode="dark" data-cat="Brand" data-name="spotify bold green">
       <a class="shot" href="themes/spotify.html" aria-label="Open Spotify bold green sample">
         <span class="mini" style="--m-bg:#121212;--m-surface:#181818;--m-line:#2A2A2A;--m-text:#FFFFFF;--m-muted:#B3B3B3;--m-accent:#1ED760;--m-accent2:#FFFFFF;--m-on:#0B0B0C;--m-r:12px;--m-fh:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="spotify" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1169,10 +1229,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="uber tight black white">
+    <article class="tile" data-slug="uber" data-mode="light" data-cat="Brand" data-name="uber tight black white">
       <a class="shot" href="themes/uber.html" aria-label="Open Uber tight black white sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F6F6F6;--m-line:#E2E2E2;--m-text:#000000;--m-muted:#6B6B6B;--m-accent:#000000;--m-accent2:#276EF1;--m-on:#FFFFFF;--m-r:4px;--m-fh:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="uber" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1188,10 +1249,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Brand" data-name="arc browser soft gradient">
+    <article class="tile" data-slug="arc" data-mode="light" data-cat="Brand" data-name="arc browser soft gradient">
       <a class="shot" href="themes/arc.html" aria-label="Open Arc browser soft gradient sample">
         <span class="mini" style="--m-bg:#FDFCFB;--m-surface:#FFFFFF;--m-line:#EDE9F5;--m-text:#191624;--m-muted:#6A6478;--m-accent:#7C4DFF;--m-accent2:#FF7AB6;--m-on:#FFFFFF;--m-r:20px;--m-fh:'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="arc" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1207,10 +1269,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Brand" data-name="nothing dot-matrix tech">
+    <article class="tile" data-slug="nothing" data-mode="dark" data-cat="Brand" data-name="nothing dot-matrix tech">
       <a class="shot" href="themes/nothing.html" aria-label="Open Nothing dot-matrix tech sample">
         <span class="mini" style="--m-bg:#0A0A0A;--m-surface:#131313;--m-line:#2B2B2B;--m-text:#F2F2F2;--m-muted:#8A8A8A;--m-accent:#FFFFFF;--m-accent2:#FF3B30;--m-on:#0B0B0C;--m-r:2px;--m-fh:'Space Grotesk', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="nothing" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1226,10 +1289,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="glassmorphism frosted glass">
+    <article class="tile" data-slug="glassmorphism" data-mode="dark" data-cat="Archetype" data-name="glassmorphism frosted glass">
       <a class="shot" href="themes/glassmorphism.html" aria-label="Open Glassmorphism frosted glass sample">
         <span class="mini" style="--m-bg:#0B1220;--m-surface:#16233A;--m-line:#33465F;--m-text:#EAF2FF;--m-muted:#A2B4CC;--m-accent:#7DD3FC;--m-accent2:#C4B5FD;--m-on:#0B0B0C;--m-r:20px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="glassmorphism" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1245,10 +1309,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="neubrutalism hard shadow">
+    <article class="tile" data-slug="neubrutalism" data-mode="light" data-cat="Archetype" data-name="neubrutalism hard shadow">
       <a class="shot" href="themes/neubrutalism.html" aria-label="Open Neubrutalism hard shadow sample">
         <span class="mini" style="--m-bg:#FFFDF5;--m-surface:#FFFFFF;--m-line:#000000;--m-text:#000000;--m-muted:#3D3D3D;--m-accent:#FF5CA8;--m-accent2:#FFD93D;--m-on:#FFFFFF;--m-r:2px;--m-fh:'Space Grotesk', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Space Grotesk', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="neubrutalism" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1264,10 +1329,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="neumorphism soft clay">
+    <article class="tile" data-slug="neumorphism" data-mode="light" data-cat="Archetype" data-name="neumorphism soft clay">
       <a class="shot" href="themes/neumorphism.html" aria-label="Open Neumorphism soft clay sample">
         <span class="mini" style="--m-bg:#E6E9EF;--m-surface:#E6E9EF;--m-line:#D3D8E2;--m-text:#2A3040;--m-muted:#6B7280;--m-accent:#4F6BED;--m-accent2:#2A3040;--m-on:#FFFFFF;--m-r:22px;--m-fh:'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="neumorphism" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1283,10 +1349,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="editorial serif magazine">
+    <article class="tile" data-slug="editorial" data-mode="light" data-cat="Archetype" data-name="editorial serif magazine">
       <a class="shot" href="themes/editorial.html" aria-label="Open Editorial serif magazine sample">
         <span class="mini" style="--m-bg:#FAF7F0;--m-surface:#FFFFFF;--m-line:#DED7C8;--m-text:#191713;--m-muted:#6A6358;--m-accent:#1F2937;--m-accent2:#B45309;--m-on:#FFFFFF;--m-r:4px;--m-fh:'Fraunces', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="editorial" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1302,10 +1369,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="swiss international style">
+    <article class="tile" data-slug="swiss" data-mode="light" data-cat="Archetype" data-name="swiss international style">
       <a class="shot" href="themes/swiss.html" aria-label="Open Swiss international style sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#FFFFFF;--m-line:#111111;--m-text:#111111;--m-muted:#5A5A5A;--m-accent:#E30613;--m-accent2:#111111;--m-on:#FFFFFF;--m-r:0px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="swiss" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1321,10 +1389,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="terminal phosphor">
+    <article class="tile" data-slug="terminal" data-mode="dark" data-cat="Archetype" data-name="terminal phosphor">
       <a class="shot" href="themes/terminal.html" aria-label="Open Terminal phosphor sample">
         <span class="mini" style="--m-bg:#050A06;--m-surface:#08120B;--m-line:#12321C;--m-text:#B9FFC9;--m-muted:#4FBF6E;--m-accent:#33FF66;--m-accent2:#33FF66;--m-on:#0B0B0C;--m-r:0px;--m-fh:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="terminal" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1340,10 +1409,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="retro 8-bit arcade">
+    <article class="tile" data-slug="retro8bit" data-mode="dark" data-cat="Archetype" data-name="retro 8-bit arcade">
       <a class="shot" href="themes/retro8bit.html" aria-label="Open Retro 8-bit arcade sample">
         <span class="mini" style="--m-bg:#1A1329;--m-surface:#241A3A;--m-line:#3D2C63;--m-text:#FFE9A8;--m-muted:#B7A6D9;--m-accent:#FFD700;--m-accent2:#FF5F6D;--m-on:#0B0B0C;--m-r:0px;--m-fh:'Press Start 2P', "SF Mono", ui-monospace, Consolas, monospace;--m-fb:'VT323', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="retro8bit" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1359,10 +1429,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="vaporwave sunset">
+    <article class="tile" data-slug="vaporwave" data-mode="dark" data-cat="Archetype" data-name="vaporwave sunset">
       <a class="shot" href="themes/vaporwave.html" aria-label="Open Vaporwave sunset sample">
         <span class="mini" style="--m-bg:#2B1055;--m-surface:#3A1A6E;--m-line:#6C3FB5;--m-text:#FFE9FB;--m-muted:#C9A6E8;--m-accent:#FF71CE;--m-accent2:#01CDFE;--m-on:#FFFFFF;--m-r:14px;--m-fh:'Syne', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="vaporwave" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1378,10 +1449,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="cyberpunk neon grid">
+    <article class="tile" data-slug="cyberpunk" data-mode="dark" data-cat="Archetype" data-name="cyberpunk neon grid">
       <a class="shot" href="themes/cyberpunk.html" aria-label="Open Cyberpunk neon grid sample">
         <span class="mini" style="--m-bg:#05060A;--m-surface:#0B0E17;--m-line:#1B2436;--m-text:#E8F6FF;--m-muted:#7C8FA8;--m-accent:#00F0FF;--m-accent2:#FF2D95;--m-on:#0B0B0C;--m-r:2px;--m-fh:'Orbitron', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'JetBrains Mono', "SF Mono", ui-monospace, Consolas, monospace"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="cyberpunk" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1397,10 +1469,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="pastel soft ui">
+    <article class="tile" data-slug="pastel" data-mode="light" data-cat="Archetype" data-name="pastel soft ui">
       <a class="shot" href="themes/pastel.html" aria-label="Open Pastel soft UI sample">
         <span class="mini" style="--m-bg:#FFF6F9;--m-surface:#FFFFFF;--m-line:#F4DFE8;--m-text:#33202A;--m-muted:#7C6470;--m-accent:#FF9EC4;--m-accent2:#A5B4FC;--m-on:#0B0B0C;--m-r:26px;--m-fh:'Quicksand', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="pastel" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1416,10 +1489,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="claymorphism chunky soft">
+    <article class="tile" data-slug="claymorphism" data-mode="light" data-cat="Archetype" data-name="claymorphism chunky soft">
       <a class="shot" href="themes/claymorphism.html" aria-label="Open Claymorphism chunky soft sample">
         <span class="mini" style="--m-bg:#EEF1FF;--m-surface:#F7F9FF;--m-line:#DCE2F7;--m-text:#1E2340;--m-muted:#666E8C;--m-accent:#6C7BFF;--m-accent2:#FFB4C8;--m-on:#FFFFFF;--m-r:28px;--m-fh:'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="claymorphism" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1435,10 +1509,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="bento box grid">
+    <article class="tile" data-slug="bento" data-mode="dark" data-cat="Archetype" data-name="bento box grid">
       <a class="shot" href="themes/bento.html" aria-label="Open Bento box grid sample">
         <span class="mini" style="--m-bg:#0B0B0F;--m-surface:#131318;--m-line:#26262E;--m-text:#F2F2F5;--m-muted:#8C8C99;--m-accent:#F97316;--m-accent2:#38BDF8;--m-on:#FFFFFF;--m-r:18px;--m-fh:'Space Grotesk', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="bento" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1454,10 +1529,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="gradient mesh + grain">
+    <article class="tile" data-slug="meshgrain" data-mode="dark" data-cat="Archetype" data-name="gradient mesh + grain">
       <a class="shot" href="themes/meshgrain.html" aria-label="Open Gradient mesh + grain sample">
         <span class="mini" style="--m-bg:#0A0118;--m-surface:#150726;--m-line:#2C1247;--m-text:#F5EEFF;--m-muted:#A99BC4;--m-accent:#A78BFA;--m-accent2:#22D3EE;--m-on:#FFFFFF;--m-r:24px;--m-fh:'Sora', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="meshgrain" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1473,10 +1549,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="paper sketch / hand drawn">
+    <article class="tile" data-slug="sketch" data-mode="light" data-cat="Archetype" data-name="paper sketch / hand drawn">
       <a class="shot" href="themes/sketch.html" aria-label="Open Paper sketch / hand drawn sample">
         <span class="mini" style="--m-bg:#FBF7EC;--m-surface:#FFFDF6;--m-line:#C9BFA8;--m-text:#2B2A26;--m-muted:#6D6656;--m-accent:#2F4B7C;--m-accent2:#C1440E;--m-on:#FFFFFF;--m-r:6px;--m-fh:'Caveat', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Lora', Georgia, "Times New Roman", serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="sketch" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1492,10 +1569,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="luxury dark serif gold">
+    <article class="tile" data-slug="luxury" data-mode="dark" data-cat="Archetype" data-name="luxury dark serif gold">
       <a class="shot" href="themes/luxury.html" aria-label="Open Luxury dark serif gold sample">
         <span class="mini" style="--m-bg:#0E0E0C;--m-surface:#151513;--m-line:#2E2C25;--m-text:#F1EDE4;--m-muted:#A39C8A;--m-accent:#C8A96A;--m-accent2:#E9D9B5;--m-on:#FFFFFF;--m-r:2px;--m-fh:'Cormorant Garamond', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="luxury" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1511,10 +1589,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="blueprint engineering">
+    <article class="tile" data-slug="blueprint" data-mode="dark" data-cat="Archetype" data-name="blueprint engineering">
       <a class="shot" href="themes/blueprint.html" aria-label="Open Blueprint engineering sample">
         <span class="mini" style="--m-bg:#06203A;--m-surface:#0A2A48;--m-line:#1D4A72;--m-text:#E6F4FF;--m-muted:#9FC2DC;--m-accent:#7DD3FC;--m-accent2:#FFFFFF;--m-on:#0B0B0C;--m-r:2px;--m-fh:'IBM Plex Mono', "SF Mono", ui-monospace, Consolas, monospace;--m-fb:'IBM Plex Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="blueprint" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1530,10 +1609,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="y2k chrome gloss">
+    <article class="tile" data-slug="y2k" data-mode="light" data-cat="Archetype" data-name="y2k chrome gloss">
       <a class="shot" href="themes/y2k.html" aria-label="Open Y2K chrome gloss sample">
         <span class="mini" style="--m-bg:#DFE6F3;--m-surface:#F2F6FF;--m-line:#B9C4DC;--m-text:#141B33;--m-muted:#5B6785;--m-accent:#FF00A8;--m-accent2:#00D0FF;--m-on:#FFFFFF;--m-r:12px;--m-fh:'Chivo', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Chivo', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="y2k" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1549,10 +1629,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="memphis playful shapes">
+    <article class="tile" data-slug="memphis" data-mode="light" data-cat="Archetype" data-name="memphis playful shapes">
       <a class="shot" href="themes/memphis.html" aria-label="Open Memphis playful shapes sample">
         <span class="mini" style="--m-bg:#FFFDF2;--m-surface:#FFFFFF;--m-line:#1A1A1A;--m-text:#111111;--m-muted:#5F5F5F;--m-accent:#FF6B6B;--m-accent2:#4ECDC4;--m-on:#FFFFFF;--m-r:20px;--m-fh:'Baloo 2', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Baloo 2', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="memphis" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1568,10 +1649,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="organic nature calm">
+    <article class="tile" data-slug="nature" data-mode="light" data-cat="Archetype" data-name="organic nature calm">
       <a class="shot" href="themes/nature.html" aria-label="Open Organic nature calm sample">
         <span class="mini" style="--m-bg:#F7F5EF;--m-surface:#FFFFFF;--m-line:#DED8C9;--m-text:#1F2A22;--m-muted:#6A7267;--m-accent:#3F6B4F;--m-accent2:#C9A227;--m-on:#FFFFFF;--m-r:20px;--m-fh:'Lora', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="nature" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1587,10 +1669,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="brutalist type block">
+    <article class="tile" data-slug="brutalist" data-mode="dark" data-cat="Archetype" data-name="brutalist type block">
       <a class="shot" href="themes/brutalist.html" aria-label="Open Brutalist type block sample">
         <span class="mini" style="--m-bg:#111111;--m-surface:#181818;--m-line:#3A3A3A;--m-text:#FFFFFF;--m-muted:#9A9A9A;--m-accent:#FFFFFF;--m-accent2:#FF4D00;--m-on:#0B0B0C;--m-r:0px;--m-fh:'Archivo', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="brutalist" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1606,10 +1689,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="monochrome editorial">
+    <article class="tile" data-slug="monochrome" data-mode="light" data-cat="Archetype" data-name="monochrome editorial">
       <a class="shot" href="themes/monochrome.html" aria-label="Open Monochrome editorial sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F4F4F4;--m-line:#D9D9D9;--m-text:#0A0A0A;--m-muted:#6E6E6E;--m-accent:#0A0A0A;--m-accent2:#0A0A0A;--m-on:#FFFFFF;--m-r:0px;--m-fh:'Playfair Display', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="monochrome" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1625,10 +1709,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="academic journal">
+    <article class="tile" data-slug="academic" data-mode="light" data-cat="Archetype" data-name="academic journal">
       <a class="shot" href="themes/academic.html" aria-label="Open Academic journal sample">
         <span class="mini" style="--m-bg:#FCFBF7;--m-surface:#FFFFFF;--m-line:#DDD8CA;--m-text:#1A1916;--m-muted:#5F5B52;--m-accent:#7B2D26;--m-accent2:#1A1916;--m-on:#FFFFFF;--m-r:0px;--m-fh:'Libre Baskerville', Georgia, "Times New Roman", serif;--m-fb:'Lora', Georgia, "Times New Roman", serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="academic" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1644,10 +1729,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="modern startup saas">
+    <article class="tile" data-slug="startup" data-mode="light" data-cat="Archetype" data-name="modern startup saas">
       <a class="shot" href="themes/startup.html" aria-label="Open Modern startup SaaS sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F8FAFC;--m-line:#E2E8F0;--m-text:#0F172A;--m-muted:#64748B;--m-accent:#6366F1;--m-accent2:#22D3EE;--m-on:#FFFFFF;--m-r:12px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="startup" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1663,10 +1749,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="ai product dark violet">
+    <article class="tile" data-slug="ai" data-mode="dark" data-cat="Archetype" data-name="ai product dark violet">
       <a class="shot" href="themes/ai.html" aria-label="Open AI product dark violet sample">
         <span class="mini" style="--m-bg:#0A0A14;--m-surface:#12121F;--m-line:#262640;--m-text:#F0F0FA;--m-muted:#8E8EAA;--m-accent:#8B5CF6;--m-accent2:#22D3EE;--m-on:#FFFFFF;--m-r:16px;--m-fh:'Sora', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="ai" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1682,10 +1769,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="fintech trustworthy">
+    <article class="tile" data-slug="fintech" data-mode="light" data-cat="Archetype" data-name="fintech trustworthy">
       <a class="shot" href="themes/fintech.html" aria-label="Open Fintech trustworthy sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F6F8FB;--m-line:#E1E7EF;--m-text:#0B1220;--m-muted:#5B6779;--m-accent:#0F766E;--m-accent2:#0B1220;--m-on:#FFFFFF;--m-r:10px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="fintech" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1701,10 +1789,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="sportswear high energy">
+    <article class="tile" data-slug="sportswear" data-mode="dark" data-cat="Archetype" data-name="sportswear high energy">
       <a class="shot" href="themes/sportswear.html" aria-label="Open Sportswear high energy sample">
         <span class="mini" style="--m-bg:#0A0A0A;--m-surface:#141414;--m-line:#2E2E2E;--m-text:#FFFFFF;--m-muted:#9C9C9C;--m-accent:#D7FF00;--m-accent2:#FF3D00;--m-on:#0B0B0C;--m-r:2px;--m-fh:'Archivo', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="sportswear" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1720,10 +1809,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="wellness spa calm">
+    <article class="tile" data-slug="wellness" data-mode="light" data-cat="Archetype" data-name="wellness spa calm">
       <a class="shot" href="themes/wellness.html" aria-label="Open Wellness spa calm sample">
         <span class="mini" style="--m-bg:#F6F2EC;--m-surface:#FFFFFF;--m-line:#E3DBD0;--m-text:#2A2622;--m-muted:#6F6862;--m-accent:#8A9A7B;--m-accent2:#C08B5C;--m-on:#FFFFFF;--m-r:22px;--m-fh:'Cormorant Garamond', Georgia, "Times New Roman", serif;--m-fb:'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="wellness" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1739,10 +1829,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="gaming neon hud">
+    <article class="tile" data-slug="gaming" data-mode="dark" data-cat="Archetype" data-name="gaming neon hud">
       <a class="shot" href="themes/gaming.html" aria-label="Open Gaming neon HUD sample">
         <span class="mini" style="--m-bg:#08030F;--m-surface:#120A1F;--m-line:#2A1840;--m-text:#F5E9FF;--m-muted:#9A86B8;--m-accent:#C026D3;--m-accent2:#22D3EE;--m-on:#FFFFFF;--m-r:6px;--m-fh:'Orbitron', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="gaming" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1758,10 +1849,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="kids bright rounded">
+    <article class="tile" data-slug="kids" data-mode="light" data-cat="Archetype" data-name="kids bright rounded">
       <a class="shot" href="themes/kids.html" aria-label="Open Kids bright rounded sample">
         <span class="mini" style="--m-bg:#FFFDF6;--m-surface:#FFFFFF;--m-line:#EFE3C9;--m-text:#2B2118;--m-muted:#6E6154;--m-accent:#FF7A00;--m-accent2:#00B3A4;--m-on:#FFFFFF;--m-r:28px;--m-fh:'Baloo 2', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="kids" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1777,10 +1869,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="corporate trustworthy">
+    <article class="tile" data-slug="corporate" data-mode="light" data-cat="Archetype" data-name="corporate trustworthy">
       <a class="shot" href="themes/corporate.html" aria-label="Open Corporate trustworthy sample">
         <span class="mini" style="--m-bg:#FFFFFF;--m-surface:#F5F7FA;--m-line:#DDE3EA;--m-text:#0F1B2D;--m-muted:#5A6675;--m-accent:#1D4ED8;--m-accent2:#0F1B2D;--m-on:#FFFFFF;--m-r:4px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="corporate" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1796,10 +1889,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="photography portfolio">
+    <article class="tile" data-slug="photography" data-mode="dark" data-cat="Archetype" data-name="photography portfolio">
       <a class="shot" href="themes/photography.html" aria-label="Open Photography portfolio sample">
         <span class="mini" style="--m-bg:#0B0B0B;--m-surface:#111111;--m-line:#2A2A2A;--m-text:#F5F5F5;--m-muted:#909090;--m-accent:#FFFFFF;--m-accent2:#909090;--m-on:#0B0B0C;--m-r:0px;--m-fh:'Cormorant Garamond', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="photography" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1815,10 +1909,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="dark" data-cat="Archetype" data-name="art deco gold geometry">
+    <article class="tile" data-slug="artdeco" data-mode="dark" data-cat="Archetype" data-name="art deco gold geometry">
       <a class="shot" href="themes/artdeco.html" aria-label="Open Art deco gold geometry sample">
         <span class="mini" style="--m-bg:#0C0B09;--m-surface:#14120E;--m-line:#3B3325;--m-text:#F4EFE2;--m-muted:#A79B85;--m-accent:#D4AF37;--m-accent2:#F4EFE2;--m-on:#FFFFFF;--m-r:0px;--m-fh:'Playfair Display', Georgia, "Times New Roman", serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="artdeco" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1834,10 +1929,11 @@ footer a{color:var(--text);border-bottom:1px solid var(--line)}
         </div>
       </div>
     </article>
-    <article class="tile" data-mode="light" data-cat="Archetype" data-name="ultra-minimal mono">
+    <article class="tile" data-slug="minimalmono" data-mode="light" data-cat="Archetype" data-name="ultra-minimal mono">
       <a class="shot" href="themes/minimalmono.html" aria-label="Open Ultra-minimal mono sample">
         <span class="mini" style="--m-bg:#FCFCFC;--m-surface:#FFFFFF;--m-line:#E8E8E8;--m-text:#111111;--m-muted:#767676;--m-accent:#111111;--m-accent2:#111111;--m-on:#FFFFFF;--m-r:0px;--m-fh:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--m-fb:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif"><span class="m-nav"><b class="m-mark"></b><u></u><u></u><u></u><i></i></span><span class="m-h">Know exactly where your product loses people.</span><span class="m-sub">Visual analytics for product teams.</span><span class="m-cta">Start free trial</span><span class="m-panel"><em><span>Active sessions</span><span>+18.4%</span></em><span class="m-bars"><b style="height:34%"></b><b style="height:58%"></b><b style="height:44%"></b><b style="height:80%"></b><b style="height:52%"></b><b style="height:96%"></b><b style="height:68%"></b><b style="height:86%"></b><b style="height:40%"></b><b style="height:72%"></b><b style="height:90%"></b><b style="height:56%"></b></span></span></span>
         <span class="overlay"><span class="open">Open sample →</span></span>
+        <button class="star" data-slug="minimalmono" title="Save this theme" aria-label="Save this theme">☆</button>
       </a>
       <div class="meta">
         <div class="swatches">
@@ -1889,6 +1985,27 @@ const grid=document.getElementById('grid'), empty=document.getElementById('empty
 const count=document.getElementById('count'), q=document.getElementById('q');
 const chips=[...document.querySelectorAll('.chip')];
 let filter='all';
+const FAV_KEY='design-themes-fav';
+let favs=new Set();
+try{ favs=new Set(JSON.parse(localStorage.getItem(FAV_KEY)||'[]')); }catch(e){}
+function paintFavs(){
+  document.querySelectorAll('.star').forEach(b=>{
+    const on=favs.has(b.dataset.slug);
+    b.classList.toggle('on',on);
+    b.textContent=on?'★':'☆';
+  });
+  const fc=document.getElementById('favcount');
+  if(fc) fc.textContent=favs.size? '('+favs.size+')' : '';
+}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('.star'); if(!s) return;
+  e.preventDefault(); e.stopPropagation();
+  const slug=s.dataset.slug;
+  favs.has(slug)?favs.delete(slug):favs.add(slug);
+  try{ localStorage.setItem(FAV_KEY, JSON.stringify([...favs])); }catch(e){}
+  paintFavs(); apply();
+});
+paintFavs();
 
 function apply(){
   const term=q.value.trim().toLowerCase();
@@ -1896,7 +2013,9 @@ function apply(){
   tiles.forEach(t=>{
     const mode=t.dataset.mode, cat=t.dataset.cat, name=t.dataset.name;
     const byMode = (filter==='dark' || filter==='light');
-    const okF = filter==='all' ? true : (byMode ? mode===filter : cat===filter);
+    const okF = filter==='all' ? true
+      : filter==='fav' ? favs.has(t.dataset.slug)
+      : byMode ? mode===filter : cat===filter;
     const okQ = !term || name.includes(term);
     const show = okF && okQ;
     t.style.display = show ? '' : 'none';
